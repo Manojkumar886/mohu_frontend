@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect, useState } from 'react'
-import { listing } from './ArrayValues';
+import { Fetchingvalues, listing, removing } from './ArrayValues';
 import { RegistrationForm } from './ResgitrationForm';
 import { Readpage } from './Readpage';
+import { Updatepage } from './Updatepage';
 
 export let Listingpage=()=>
 {
@@ -11,6 +12,8 @@ export let Listingpage=()=>
     const[createpage,setCreatepage]=useState(false);
     const[readpage,setReadpage]=useState(false);
     const[pos,setPos]=useState(0);
+    const[updatepage,setUpdatepage]=useState(false);
+    const[object,setObject]=useState({});
 
     const gettingvalues=()=>
     {
@@ -49,6 +52,17 @@ export let Listingpage=()=>
                 >BACK</button>
                 </>
                 :
+                (updatepage)?
+                <>
+                <Updatepage who={pos} studentdet={object} />
+                <button 
+                onClick={()=>
+                {
+                   setUpdatepage(false)
+                }}
+                >BACK</button>
+                </>
+                :
                 <>
                 <button className='btn btn-outline-info col-2 mt-2 mb-3'
                 onClick={()=>
@@ -64,6 +78,7 @@ export let Listingpage=()=>
                             <th>student NAME</th>
                             <th>Student MARK</th>
                             <th>Student SALARY</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +95,25 @@ export let Listingpage=()=>
                                     <td>{data.studname}</td>
                                     <td>{data.studmark}</td>
                                     <td>{data.studsalary}</td>
+                                    <td>
+                                        <button
+                                        className='btn btn-outline-warning'
+                                        onClick={()=>
+                                        {
+                                            setUpdatepage(true)
+                                            setPos(index)
+                                            const temp=Fetchingvalues(data.studname);
+                                            setObject(temp);
+                                        }}
+                                        >UPDATE</button>
+                                        <button
+                                         className='btn btn-outline-danger'
+                                         onClick={()=>
+                                         {
+                                             setTemparray(removing(index))
+                                         }}
+                                        >DELETE</button>
+                                    </td>
                                 </tr>
                                 </>
                             ))

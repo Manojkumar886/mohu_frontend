@@ -1,15 +1,15 @@
+import { useState } from "react"
+import { altervalues } from "./ArrayValues";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState } from 'react';
-import { creation } from './ArrayValues';
-export let RegistrationForm=()=>
+export const Updatepage=(replaceing)=>
 {
-    // const[getvariable,setfunction]=usestate(initialization)
+
+    const[pos,setPos]=useState(replaceing.who);
     const[myvalues,setMyvalues]=useState({
-        "studid":0,
-        "studname":"",
-        "studmark":0,
-        "studsalary":""
+        "studid":replaceing.studentdet.studid,
+        "studname":replaceing.studentdet.studname,
+        "studmark":replaceing.studentdet.studmark,
+        "studsalary":replaceing.studentdet.studsalary
     })
 
     const track=(datas)=>
@@ -23,13 +23,11 @@ export let RegistrationForm=()=>
             }
         })
     }
-
-    const register=()=>
+    const updating=()=>
     {
-        alert(" Welcome to zealous college"+JSON.stringify(myvalues))
-        creation(myvalues) 
-
-        
+        altervalues(myvalues,pos);
+        alert(" your values is updated successfully");
+        alert(JSON.stringify(myvalues));
     }
     return(
         <>
@@ -37,7 +35,7 @@ export let RegistrationForm=()=>
                 <div className='row justify-content-center'>
                     <h1 className='text-center'>StudentRegistrationForm</h1>
                     <div className='col-lg-8 col-md-10 col-sm-12'>
-                        <div >
+                        <div className='form-group'>
                             <label className='form-label'>Enter your Regno</label>
                             <input
                             placeholder='Enter your regno'
@@ -48,7 +46,7 @@ export let RegistrationForm=()=>
                             className='form-control'
                              />
                         </div>
-                        <div className=' mt-2'>
+                        <div className='form-group mt-2'>
                             <label className='form-label'>Enter your Name</label>
                             <input
                             placeholder='Enter your Fullname'
@@ -59,7 +57,7 @@ export let RegistrationForm=()=>
                             className='form-control'
                              />
                         </div>
-                        <div className=' mt-2'>
+                        <div className='form-group mt-2'>
                             <label className='form-label'>Enter your 10th MARK</label>
                             <input
                             placeholder='Enter your 10thMARK'
@@ -70,7 +68,7 @@ export let RegistrationForm=()=>
                             className='form-control'
                              />
                         </div>
-                        <div className=' mt-2'>
+                        <div className='form-group mt-2'>
                             <label className='form-label'>Enter your Expected Salary</label>
                             <input
                             placeholder='Enter your salary'
@@ -82,7 +80,7 @@ export let RegistrationForm=()=>
                              />
                         </div>
                         <div className='row justify-content-center mt-5'>
-                            <button className='btn btn-outline-success col-5 me-3' onClick={register}>Register</button>
+                            <button className='btn btn-outline-success col-5 me-3' onClick={updating}>Update</button>
                             <button className='btn btn-outline-danger col-5 ms-3'>Cancel</button>
                         </div>
                     </div>
