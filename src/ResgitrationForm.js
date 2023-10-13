@@ -1,6 +1,7 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react';
+import { creation } from './ArrayValues';
 export let RegistrationForm=()=>
 {
     // const[getvariable,setfunction]=usestate(initialization)
@@ -26,6 +27,9 @@ export let RegistrationForm=()=>
     const register=()=>
     {
         alert(" Welcome to zealous college"+JSON.stringify(myvalues))
+        creation(myvalues) 
+
+        
     }
     return(
         <>
